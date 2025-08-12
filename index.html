@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harsh Pratap Singh - Portfolio</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-04RP3K2MZ0"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
         
@@ -587,7 +588,12 @@
                 const rotation = (Math.random() - 0.5) * 2; // Random rotation between -1 and 1 degrees
                 card.style.transform = `rotate(${rotation}deg)`;
             });
-        });
+        })
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+    
+       gtag('config', 'G-04RP3K2MZ0');
     </script>
 </body>
 </html>
