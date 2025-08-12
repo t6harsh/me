@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Johnson - Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #ffffff;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Hand-drawn border effect */
+        .sketch-border {
+            position: relative;
+        }
+        
+        .sketch-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid #666;
+            border-radius: 5px;
+            transform: rotate(-0.5deg);
+            z-index: -1;
+        }
+        
+        /* Navbar */
+        nav {
+            background: #f8f8f8;
+            padding: 20px 0;
+            border-bottom: 3px solid #ccc;
+            position: relative;
+        }
+        
+        nav::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                #999 0px,
+                #999 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 60px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #444;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #222;
+            border: 2px solid #666;
+            border-radius: 8px;
+            transform: rotate(-1deg);
+            background: #f0f0f0;
+        }
+        
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        /* Page sections */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* About page layout */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: start;
+        }
+        
+        .profile-section {
+            text-align: center;
+        }
+        
+        .profile-image {
+            width: 280px;
+            height: 350px;
+            margin: 0 auto 30px;
+            border: 3px solid #666;
+            border-radius: 15px;
+            background: #f9f9f9;
+            position: relative;
+            transform: rotate(-1deg);
+            overflow: hidden;
+        }
+        
+        /* Hand-drawn portrait SVG */
+        .sketch-portrait {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+        
+        .profile-info h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            padding: 12px 24px;
+            border: 2px solid #666;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #444;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            background: #f8f8f8;
+        }
+        
+        .social-links a:hover {
+            background: #e8e8e8;
+            transform: rotate(1deg);
+            border-color: #444;
+        }
+        
+        /* About text with retro font */
+        .about-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 16px;
+            line-height: 2;
+            color: #444;
+            background: #f8f8f8;
+            padding: 40px;
+            border: 3px solid #ccc;
+            border-radius: 10px;
+            position: relative;
+            transform: rotate(0.5deg);
+        }
+        
+        .about-text::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 2px solid #999;
+            border-radius: 12px;
+            transform: rotate(-1deg);
+            z-index: -1;
+        }
+        
+        .about-text h2 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #222;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        /* Projects page */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background: #f9f9f9;
+            border: 3px solid #ccc;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            transform: rotate(-0.5deg);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: rotate(0.5deg) scale(1.02);
+            border-color: #666;
+        }
+        
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid #bbb;
+            border-radius: 17px;
+            transform: rotate(1deg);
+            z-index: -1;
+        }
+        
+        .project-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .project-card p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #e8e8e8;
+            border: 2px solid #666;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #444;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            background: #ddd;
+            transform: rotate(-1deg);
+        }
+        
+        /* Contact page */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact-form {
+            background: #f8f8f8;
+            padding: 40px;
+            border: 3px solid #ccc;
+            border-radius: 15px;
+            margin-top: 40px;
+            transform: rotate(-0.5deg);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #444;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #999;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: #fff;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #666;
+            transform: rotate(0.5deg);
+        }
+        
+        .submit-btn {
+            background: #e8e8e8;
+            border: 3px solid #666;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #444;
+        }
+        
+        .submit-btn:hover {
+            background: #ddd;
+            transform: rotate(-1deg) scale(1.05);
+        }
+        
+        /* Page titles */
+        .page-title {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+            position: relative;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: repeating-linear-gradient(
+                90deg,
+                #999 0px,
+                #999 15px,
+                transparent 15px,
+                transparent 30px
+            );
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .nav-links {
+                gap: 30px;
+            }
+            
+            .nav-links a {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+            
+            .profile-image {
+                width: 200px;
+                height: 250px;
+            }
+            
+            .about-text {
+                padding: 25px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link active" onclick="showPage('about', this)">About</a></li>
+                <li><a href="#projects" class="nav-link" onclick="showPage('projects', this)">Projects</a></li>
+                <li><a href="#contact" class="nav-link" onclick="showPage('contact', this)">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- About Page -->
+        <div id="about" class="page active">
+            <div class="about-content">
+                <div class="profile-section">
+                    <div class="profile-image">
+                        <svg class="sketch-portrait" viewBox="0 0 200 280">
+                            <!-- Hand-drawn style portrait -->
+                            <g stroke="#666" stroke-width="2" fill="none">
+                                <!-- Head outline -->
+                                <ellipse cx="100" cy="80" rx="45" ry="55" stroke-width="3"/>
+                                
+                                <!-- Hair -->
+                                <path d="M55 45 Q65 25 85 30 Q100 20 115 30 Q135 25 145 45" stroke-width="2.5"/>
+                                <path d="M60 50 Q70 35 80 40 Q90 30 100 35 Q110 30 120 35 Q130 35 140 50" stroke-width="1.5"/>
+                                
+                                <!-- Eyes -->
+                                <ellipse cx="85" cy="70" rx="6" ry="4"/>
+                                <ellipse cx="115" cy="70" rx="6" ry="4"/>
+                                <circle cx="85" cy="70" r="2" fill="#666"/>
+                                <circle cx="115" cy="70" r="2" fill="#666"/>
+                                
+                                <!-- Eyebrows -->
+                                <path d="M78 62 Q85 58 92 62" stroke-width="1.5"/>
+                                <path d="M108 62 Q115 58 122 62" stroke-width="1.5"/>
+                                
+                                <!-- Nose -->
+                                <path d="M100 75 L98 88 L102 88" stroke-width="1.5"/>
+                                <path d="M96 86 Q100 88 104 86" stroke-width="1"/>
+                                
+                                <!-- Mouth -->
+                                <path d="M92 100 Q100 105 108 100" stroke-width="2"/>
+                                
+                                <!-- Neck -->
+                                <path d="M80 130 Q90 140 100 140 Q110 140 120 130" stroke-width="2"/>
+                                
+                                <!-- Shirt/collar -->
+                                <path d="M70 140 Q100 145 130 140 L135 180 Q100 175 65 180 Z" stroke-width="2"/>
+                                <path d="M85 140 Q100 150 115 140" stroke-width="1.5"/>
+                                
+                                <!-- Subtle shading lines -->
+                                <path d="M75 85 Q80 90 75 95" stroke-width="0.5" opacity="0.6"/>
+                                <path d="M125 85 Q120 90 125 95" stroke-width="0.5" opacity="0.6"/>
+                            </g>
+                        </svg>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <h1>Harsh Pratap Singh</h1>
+                        <div class="social-links">
+                            <a href="https://linkedin.com/in/t6harsh" target="_blank">LinkedIn</a>
+                            <a href="https://github.com/t6harsh" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-text">
+                    <h2>Hi, I'm Harsh Pratap Singh 👋</h2>
+                    <p><strong>Machine Learning Engineer | Data Scientist | Full-Stack Developer | Software Engineer</strong></p>
+                    
+                    <p>I design and build smart, scalable, and impactful tech solutions — from intelligent machine learning models to full-stack web applications — using <strong>Python</strong>, <strong>Flask</strong>, <strong>JavaScript</strong>, <strong>Vue.js</strong>, <strong>MongoDB</strong>, <strong>SQLite</strong>, and more. With a strong foundation in <strong>Mathematics</strong> and <strong>Data Science</strong>, I specialize in turning complex problems into simple, elegant solutions.</p>
+                    
+                    <p>I'm currently pursuing my <strong>B.Sc. in Data Science and Programming</strong> at <strong>IIT Madras</strong>, and have completed a <strong>B.Sc. in Physics, Chemistry & Mathematics</strong> from <strong>IFTM University</strong> — a blend of analytical, computational, and problem-solving skills that fuel my work.</p>
+                    
+                    <p>When I'm not coding, you'll probably find me <strong>editing videos</strong>, <strong>exploring new technologies</strong>, or hiking somewhere off the beaten path. I'm driven by <strong>continuous learning</strong> and a belief that technology should make life smarter, easier, and more exciting.</p>
+                    
+                    <p><strong>Let's build something amazing together! 🚀</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Page -->
+        <div id="projects" class="page">
+            <h1 class="page-title">My Projects</h1>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Library Management System</h3>
+                    <p>Built a full-stack multi-user Library Management System using <strong>Flask</strong>, <strong>SQLite</strong>, and <strong>Bootstrap</strong> as part of the Modern Application Development course. Designed secure login/authentication, relational database schema, and intuitive dashboards for both users and admins.</p>
+                    <div style="margin-top: 15px; padding: 10px; background: #f0f0f0; border-radius: 5px; font-size: 14px;">
+                        <strong>Grade:</strong> S (10/10) for end-to-end design and functionality
+                    </div>
+                    <a href="#" class="project-link">View Project</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3>System Threat Forecasting</h3>
+                    <p><strong>IIT Madras | Solo Project</strong><br>Built ML models to predict malware infections using system telemetry data. Used <strong>Python</strong>, <strong>Scikit-learn</strong>, <strong>LightGBM</strong>, <strong>XGBoost</strong>, and <strong>Pandas</strong> for feature engineering, dimensionality reduction, RFECV, and hyperparameter tuning.</p>
+                    <div style="margin-top: 15px; padding: 10px; background: #f0f0f0; border-radius: 5px; font-size: 14px;">
+                        <strong>Result:</strong> Achieved 0.6295 accuracy, graded A in IIT Madras DS course
+                    </div>
+                    <a href="#" class="project-link">View Project</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3>TaskOrbit – Service Management</h3>
+                    <p><strong>IIT Madras | Solo Project</strong><br>A full-stack platform to manage household services with separate roles for Admin, Customer, and Service Professional. Built with <strong>Vue.js</strong> frontend and <strong>Python (Flask)</strong> + <strong>SQL</strong> backend, featuring role-based access and background task handling.</p>
+                    <div style="margin-top: 15px; padding: 10px; background: #f0f0f0; border-radius: 5px; font-size: 14px;">
+                        <strong>Achievement:</strong> Graded S (10/10) in IIT Madras BS Program
+                    </div>
+                    <a href="#" class="project-link">View Project</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3>Gamified Financial Literacy App</h3>
+                    <p><strong>IIT Madras | Project Manager</strong><br>Created an engaging learning platform for kids aged 8–14 to build financial literacy through interactive modules. Built with <strong>Vue.js</strong> and <strong>Python (Flask)</strong>, featuring gamified lessons, quiz modules, and progress tracking.</p>
+                    <a href="#" class="project-link">View Project</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3>Sales Forecasting & Inventory Optimization</h3>
+                    <p><strong>IIT Madras | Solo Project</strong><br>Conducted end-to-end analysis using <strong>Google Sheets</strong> to forecast sales and optimize inventory for a local grocery store. Identified top-selling and underperforming products, reduced overstock, and improved stock turnover rates with detailed reports and visual dashboards.</p>
+                    <a href="#" class="project-link">View Project</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3>Sketch-Style Portfolio</h3>
+                    <p>This very website! A hand-drawn, sketch-style portfolio showcasing my work with a unique minimalist design approach using modern web technologies.</p>
+                    <a href="#" class="project-link">View Project</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <h1 class="page-title">Get In Touch</h1>
+            <div class="contact-content">
+                <p>I'd love to hear from you! Whether you have a project in mind, want to collaborate, or just want to say hello, feel free to reach out.</p>
+                
+                <div class="contact-form">
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId, element) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Remove active class from all nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // Show selected page and mark nav link as active
+            document.getElementById(pageId).classList.add('active');
+            element.classList.add('active');
+        }
+        
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! I\'ll get back to you soon.');
+            event.target.reset();
+        }
+        
+        // Add some interactive sketch effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Randomly rotate project cards slightly
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach((card, index) => {
+                const rotation = (Math.random() - 0.5) * 2; // Random rotation between -1 and 1 degrees
+                card.style.transform = `rotate(${rotation}deg)`;
+            });
+        });
+    </script>
+</body>
+</html>
