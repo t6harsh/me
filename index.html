@@ -46,6 +46,7 @@
             padding: 20px 0;
             border-bottom: 3px solid #ccc;
             position: relative;
+            z-index: 10; /* Ensure navbar is on top */
         }
         
         nav::after {
@@ -98,7 +99,51 @@
             transform: rotate(-1deg);
             background: #f0f0f0;
         }
+
+        /* --- NEW: Dropdown Styles --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f8f8f8;
+            min-width: 170px; /* Increased width a bit */
+            z-index: 1;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-top: 5px;
+            transform: rotate(1deg);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .dropdown-content a {
+            color: #444;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            font-size: 16px;
+            /* Override parent styles for clean dropdown links */
+            border: none !important;
+            background: none !important;
+            transform: none !important;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #e8e8e8 !important;
+            color: #222 !important;
+            border-radius: 6px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
         
+        /* --- End of Dropdown Styles --- */
+
         /* Main container */
         .container {
             max-width: 1200px;
@@ -426,7 +471,15 @@
             <ul class="nav-links">
                 <li><a href="#about" class="nav-link active" onclick="showPage('about', this)">About</a></li>
                 <li><a href="#projects" class="nav-link" onclick="showPage('projects', this)">Projects</a></li>
-                <li><a href="Resume.pdf" target="_blank" class="nav-link">Resume</a></li>
+                
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="nav-link">Resume</a>
+                    <div class="dropdown-content">
+                        <a href="Resume-DS.pdf" target="_blank">Data Science</a>
+                        <a href="Resume-FSD.pdf" target="_blank">Full Stack</a>
+                    </div>
+                </li>
+                
                 <li><a href="#contact" class="nav-link" onclick="showPage('contact', this)">Contact</a></li>
             </ul>
         </div>
@@ -573,14 +626,18 @@
             
             // Remove active class from all nav links
             const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => link.classList.remove('active'));
+            navLinks.forEach(link => {
+                // Check if the parent is not the dropdown to remove active class
+                if (!link.parentElement.classList.contains('dropdown')) {
+                    link.classList.remove('active');
+                }
+            });
             
             // Show selected page and mark nav link as active
             document.getElementById(pageId).classList.add('active');
             element.classList.add('active');
         }
 
-        // RE-ADDED JAVASCRIPT FUNCTION FOR THE FORM
         function handleSubmit(event) {
             event.preventDefault();
             alert('Thank you for your message! But I can\'t get your message this way. You can dm me on linkedin or mail me - harsh.pratap9904+portfolio@gmail.com');
