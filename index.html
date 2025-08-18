@@ -283,6 +283,29 @@
             margin: 0 auto;
             text-align: center;
         }
+
+        .contact-details {
+            margin: 40px 0;
+            font-size: 16px;
+            line-height: 1.8;
+            background: #f8f8f8;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .contact-details p {
+            margin-bottom: 10px;
+        }
+
+        .contact-details a {
+            color: #333;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .contact-details a:hover {
+            text-decoration: underline;
+        }
         
         .contact-form {
             background: #f8f8f8;
@@ -375,7 +398,9 @@
             }
             
             .nav-links {
-                gap: 30px;
+                gap: 20px; /* Adjusted gap for smaller screens */
+                flex-wrap: wrap; /* Allow nav items to wrap */
+                justify-content: center;
             }
             
             .nav-links a {
@@ -396,58 +421,39 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <ul class="nav-links">
                 <li><a href="#about" class="nav-link active" onclick="showPage('about', this)">About</a></li>
                 <li><a href="#projects" class="nav-link" onclick="showPage('projects', this)">Projects</a></li>
+                <li><a href="Resume.pdf" target="_blank" class="nav-link">Resume</a></li>
                 <li><a href="#contact" class="nav-link" onclick="showPage('contact', this)">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <!-- About Page -->
         <div id="about" class="page active">
             <div class="about-content">
                 <div class="profile-section">
                     <div class="profile-image">
                         <svg class="sketch-portrait" viewBox="0 0 200 280">
-                            <!-- Hand-drawn style portrait -->
                             <g stroke="#666" stroke-width="2" fill="none">
-                                <!-- Head outline -->
                                 <ellipse cx="100" cy="80" rx="45" ry="55" stroke-width="3"/>
-                                
-                                <!-- Hair -->
                                 <path d="M55 45 Q65 25 85 30 Q100 20 115 30 Q135 25 145 45" stroke-width="2.5"/>
                                 <path d="M60 50 Q70 35 80 40 Q90 30 100 35 Q110 30 120 35 Q130 35 140 50" stroke-width="1.5"/>
-                                
-                                <!-- Eyes -->
                                 <ellipse cx="85" cy="70" rx="6" ry="4"/>
                                 <ellipse cx="115" cy="70" rx="6" ry="4"/>
                                 <circle cx="85" cy="70" r="2" fill="#666"/>
                                 <circle cx="115" cy="70" r="2" fill="#666"/>
-                                
-                                <!-- Eyebrows -->
                                 <path d="M78 62 Q85 58 92 62" stroke-width="1.5"/>
                                 <path d="M108 62 Q115 58 122 62" stroke-width="1.5"/>
-                                
-                                <!-- Nose -->
                                 <path d="M100 75 L98 88 L102 88" stroke-width="1.5"/>
                                 <path d="M96 86 Q100 88 104 86" stroke-width="1"/>
-                                
-                                <!-- Mouth -->
                                 <path d="M92 100 Q100 105 108 100" stroke-width="2"/>
-                                
-                                <!-- Neck -->
                                 <path d="M80 130 Q90 140 100 140 Q110 140 120 130" stroke-width="2"/>
-                                
-                                <!-- Shirt/collar -->
                                 <path d="M70 140 Q100 145 130 140 L135 180 Q100 175 65 180 Z" stroke-width="2"/>
                                 <path d="M85 140 Q100 150 115 140" stroke-width="1.5"/>
-                                
-                                <!-- Subtle shading lines -->
                                 <path d="M75 85 Q80 90 75 95" stroke-width="0.5" opacity="0.6"/>
                                 <path d="M125 85 Q120 90 125 95" stroke-width="0.5" opacity="0.6"/>
                             </g>
@@ -466,19 +472,14 @@
                 <div class="about-text">
                     <h2>Hi, I'm Harsh Pratap Singh 👋</h2>
                     <p><strong>Machine Learning Engineer | Data Scientist | Full-Stack Developer | Software Engineer</strong></p>
-                    
                     <p>I design and build smart, scalable, and impactful tech solutions — from intelligent machine learning models to full-stack web applications — using <strong>Python</strong>, <strong>Flask</strong>, <strong>JavaScript</strong>, <strong>Vue.js</strong>, <strong>MongoDB</strong>, <strong>SQLite</strong>, and more. With a strong foundation in <strong>Mathematics</strong> and <strong>Data Science</strong>, I specialize in turning complex problems into simple, elegant solutions.</p>
-                    
                     <p>I'm currently pursuing my <strong>B.S. in Data Science and Programming</strong> at <strong>IIT Madras</strong>, and have completed a <strong>B.Sc. in Physics, Chemistry & Mathematics</strong> from <strong>IFTM University</strong> — a blend of analytical, computational, and problem-solving skills that fuel my work.</p>
-                    
                     <p>When I'm not coding, you'll probably find me <strong>editing videos</strong>, <strong>exploring new technologies</strong>, or hiking somewhere off the beaten path. I'm driven by <strong>continuous learning</strong> and a belief that technology should make life smarter, easier, and more exciting.</p>
-                    
                     <p><strong>Let's build something amazing together! 🚀</strong></p>
                 </div>
             </div>
         </div>
 
-        <!-- Projects Page -->
         <div id="projects" class="page">
             <h1 class="page-title">My Projects</h1>
             <div class="projects-grid">
@@ -529,11 +530,16 @@
             </div>
         </div>
 
-        <!-- Contact Page -->
         <div id="contact" class="page">
             <h1 class="page-title">Get In Touch</h1>
             <div class="contact-content">
-                <p>I'd love to hear from you! Whether you have a project in mind, want to collaborate, or just want to say hello, feel free to reach out.</p>
+                <p>I'd love to hear from you! You can reach me directly through the links below or use the form to send a message to my inbox.</p>
+                
+                <div class="contact-details">
+                    <p>📧 <strong>Email:</strong> <a href="mailto:harsh.pratap9904@gmail.com">harsh.pratap9904@gmail.com</a></p>
+                    <p>🔗 <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/t6harsh" target="_blank">linkedin.com/in/t6harsh</a></p>
+                    <p>📍 <strong>Location:</strong> Gurugram, India</p>
+                </div>
                 
                 <div class="contact-form">
                     <form onsubmit="handleSubmit(event)">
@@ -573,7 +579,8 @@
             document.getElementById(pageId).classList.add('active');
             element.classList.add('active');
         }
-        
+
+        // RE-ADDED JAVASCRIPT FUNCTION FOR THE FORM
         function handleSubmit(event) {
             event.preventDefault();
             alert('Thank you for your message! But I can\'t get your message this way. You can dm me on linkedin or mail me - harsh.pratap9904+portfolio@gmail.com');
