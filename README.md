@@ -58,10 +58,6 @@ The project has a very simple and flat file structure:
 
 ├── index.html # The main and only HTML file for all content and styling
 
-├── Resume\_DS.pdf # Resume tailored for Data Science roles
-
-├── Resume\_Full\_Stack.pdf # Resume tailored for Full Stack roles
-
 ***
 
 **🔧 How to Customize**
